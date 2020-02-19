@@ -2,6 +2,7 @@ ID: HANA_APP
 _schema-version: '2.1'
 version: 0.0.1
 modules:
+
   - name: web
     type: html5
     path: web
@@ -13,11 +14,21 @@ modules:
           name: core-xsjs-backend
           url: '~{url}'
           forwardAuthToken: true
+      - name: ui5
+      
   - name: db
     type: hdb
     path: db
     requires:
       - name: hdi_db
+        properties:
+          TARGET_CONTAINER: ~{hdi-container-name}
+      - name: cross-container-service-1
+        group: SERVICE_REPLACEMENTS
+        properties:
+          key: ServiceName_1
+          service: ~{the-service-name}
+                            
   - name: core_xsjs
     type: nodejs
     path: core_xsjs
@@ -29,6 +40,7 @@ modules:
       - name: UAA-service
       - name: hdi_db
       - name: db
+      
 resources:
   - name: UAA-service
     type: com.sap.xs.uaa-space
@@ -41,3 +53,15 @@ resources:
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
+  - name: ui5
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: sapui5_sb
+      service-plan: sapui5-1.52
+  - name: cross-container-service-1
+    parameters:
+       service-name: CROSS_SCHEMA_PRODUCTS
+    properties:
+       the-service-name: ${service-name}
+    type: org.cloudfoundry.existing-service
+

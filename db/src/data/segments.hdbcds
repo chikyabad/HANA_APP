@@ -1,0 +1,13 @@
+using PRODUCT_SEGMENT as P_SEGMENT;
+using PurchaseOrder.Item as Item;
+
+context segments {
+
+    define view SegmentsView as
+        select from P_SEGMENT as S
+    		join Item as I on S.PRODUCT = I.PRODUCT
+    		{
+    		 "S"."SEGMENT",
+    		 "I"."PRODUCT"
+    		};
+};

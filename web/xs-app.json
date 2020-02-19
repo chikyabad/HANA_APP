@@ -1,14 +1,29 @@
 {
 	"welcomeFile": "index.html",
 	"authenticationMethod": "route",
-	"routes": [{
-			  "source": "(.*)(.xsjs)",
-			  "destination": "core-xsjs-backend",
-			  "csrfProtection": false,
-			  "authenticationType": "xsuaa"
-			}, {
-			  "source": "(.*)(.xsodata)",
-			  "destination": "core-xsjs-backend",
-			  "authenticationType": "xsuaa"
-			}]
+	"routes": [
+					{
+					  "source": "(.*)(.xsjs)",
+					  "destination": "core-xsjs-backend",
+					  "csrfProtection": false,
+					  "authenticationType": "xsuaa"
+					}, {
+					  "source": "(.*)(.xsodata)",
+					  "destination": "core-xsjs-backend",
+					  "authenticationType": "xsuaa"
+					},
+					{
+						"source": "/(.*)",
+						"localDir": "resources",
+						"authenticationType": "xsuaa",
+						"replace": {
+							"pathSuffixes": ["index.html", "odataTest.html"],
+							"services": {
+								"sapui5_sb": {
+									"tag": "ui5"
+									}
+								}		
+								}
+					}
+				]
 }

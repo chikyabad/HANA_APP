@@ -1,0 +1,8 @@
+{
+  "PRODUCT_SEGMENT": {
+    "target": {
+      "object": "PRODUCT_SEGMENT",
+      "schema": "PLAIN"
+    }
+  }
+}
